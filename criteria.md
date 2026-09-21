@@ -23,8 +23,7 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+Four of my five questions have their answer stated in a single sentence in one post, which is the easy case for this corpus. The housing-lottery question is the one I'd expect to miss: "credit hours" also shows up in `advising_registration.txt` ("staggered by credit hours, same as the housing lottery"), so a near-duplicate could crowd out the real answer. 5 of 5 would assume no crowding at all.
 
 ---
 
@@ -33,8 +32,7 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+All five, because the grounding instruction tells the model to name the file and every chunk is labelled with its filename in the prompt, so there's no chunk the model could draw on without a name attached. If this misses, it means the model ignored an explicit instruction, which I want to know about rather than tolerate one of.
 
 ---
 
@@ -50,48 +48,25 @@ in at least 4 of 5 tries.
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+The out-of-scope questions (Mongolia, diesel engines, ibuprofen) share almost no vocabulary with dining halls and dorms, so I expect them to land far from anything in the store. I allow one miss because a question like the Rust for-loop could loosely match course posts about workload and "loops" of weekly assignments.
 
 ---
 
-## 4. Something about your chunks
+## 4. Chunks stand on their own
 
-<!-- YOU WRITE THIS ONE.
-
-     How would you know if your chunks were the right size? Name something
-     countable or observable.
-
-     Examples of the right shape — don't copy these, they should come from
-     what you actually saw in Milestone 3:
-       - "At least 4 of 5 sampled chunks read as a complete thought, with no
-          sentence cut in half at either end."
-       - "No chunk is shorter than 200 characters, since anything below that
-          in my corpus turned out to be a heading with no content under it." -->
-
-
+At least 4 of 5 chunks printed by `python app.py chunks -n 5` can answer one specific question on their own (without the rest of the post), and no chunk in the whole index is shorter than 60 characters.
 
 **Why this target:**
-
-
+In Milestone 1 I saw posts that each hold two or three separate facts in separate paragraphs (wait time, then hours and price), so if I split by paragraph each piece should still answer something. 60 characters is roughly the length of a post's title line alone; anything shorter is a fragment like the 2-character tail the starter produced on `advice_threads`. I allow one weak chunk out of five because some posts are one-liners of filler ("Nobody tells you this at orientation").
 
 ---
 
-## 5. Your choice
+## 5. The cited source is the right one
 
-<!-- YOU WRITE THIS ONE TOO.
-
-     Pick something you actually care about getting right. It could be about
-     speed, about refusals, about a particular kind of question your corpus
-     handles badly, about source attribution being correct rather than merely
-     present — anything, as long as it names a number or an observable
-     outcome. -->
-
-
+For my 5 test questions, the file named in the answer's `Source:` line is the one that actually contains the `expects` phrase in at least 4 of 5 answers — not just any retrieved file.
 
 **Why this target:**
-
-
+Criterion 2 only checks that *a* source is named. This corpus has a lot of near-duplicates (every dining hall has a `_followup` post, every course has `_exams` and `_workload` spin-offs), so the model citing the wrong-but-similar file is the failure I actually expect. Citing either the original or its follow-up counts as correct if that file contains the phrase. One miss allowed because the dining follow-ups repeat the original's numbers almost word for word.
 
 ---
 
@@ -107,26 +82,4 @@ in at least 4 of 5 tries.
          For at least 4 of my 5 test questions, the retrieved chunks include
          one that contains the answer.
 
-         **Why this target:** ...
-
-         > **Revised in unit 2:** For at least 4 of 5 questions, the top three
-         > results contain the answer.
-         >
-         > **Why revised:** I couldn't judge "the chunks include one that
-         > contains the answer" the same way twice — I scored two questions
-         > differently on Monday than on Wednesday. The new version is
-         > something I can actually check.
-
-     That's a revision because the criterion couldn't be MEASURED.
-
-     Lowering a target because you missed it is not a revision, and it costs
-     you the point:
-
-         ✗ "I said 4 of 5 but got 2 of 5, so 2 of 5 is more realistic."
-
-     A number you missed stays where it is, gets diagnosed, and gets a fix
-     attempted. That's where the points are.
-
-     The whole reason the originals stay visible is so someone can see what you
-     said before you knew the answer.
-     ───────────────────────────────────────────────────────────────────────── -->
+         
