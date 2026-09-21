@@ -30,12 +30,9 @@ CORPUS = os.getenv("AI201_CORPUS", "campus_life")
 CHUNK_SIZE = 800        # characters per chunk
 CHUNK_OVERLAP = 120     # characters shared between neighbouring chunks
 
-# Used by my split_documents (the two numbers above only drive fallback_split).
-# campus_life posts average ~317 characters, split into a title line and 1-3
-# short paragraphs that each hold a separate fact. A chunk is one or more whole
-# paragraphs, capped at PARA_MAX_CHARS, with the post's title repeated on top.
-PARA_MAX_CHARS = 450    # never grow a chunk past this by merging paragraphs
-PARA_MIN_CHARS = 120    # a paragraph shorter than this gets merged into a neighbour
+# split_documents uses these; the two above only drive fallback_split.
+PARA_MAX_CHARS = 450
+PARA_MIN_CHARS = 120
 
 
 # ─── Retrieval (Milestone 4) ─────────────────────────────────────────────────
@@ -50,9 +47,7 @@ TOP_K = 5               # how many chunks to pull back per question
 # 0.6 is a reasonable starting point, not a right answer. Milestone 4 has you
 # measure your own two groups of distances and put the cutoff in the gap.
 # Most corpora land somewhere between 0.45 and 0.75.
-# Measured on campus_life with my chunker: my five test questions had best
-# distances 0.18-0.40, the five OUT_OF_SCOPE questions 0.82-0.93. 0.6 sits
-# roughly in the middle of that gap, ~0.2 clear of each group.
+# In-corpus best distances 0.18-0.40, out-of-scope 0.82-0.93.
 THRESHOLD = 0.6
 
 

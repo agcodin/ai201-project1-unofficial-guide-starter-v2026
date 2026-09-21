@@ -21,8 +21,6 @@ class Document:
     text: str
 
 
-# Poster-introduction filler that carries no facts. "I lived here my sophomore
-# year." even turns up in course reviews, where it's actively misleading.
 FILLER_SENTENCES = [
     "I lived here my sophomore year.",
     "Second-year here.",
@@ -48,7 +46,6 @@ def clean_text(raw: str) -> str:
 
     for filler in FILLER_SENTENCES:
         text = text.replace(filler, "")
-    # Removing a lead-in can leave a line starting lowercase ("a lot of reading").
     text = "\n".join(
         line.strip()[:1].upper() + line.strip()[1:] for line in text.split("\n")
     )

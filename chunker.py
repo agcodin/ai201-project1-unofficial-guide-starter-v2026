@@ -81,21 +81,7 @@ def fallback_split(
 
 
 def split_documents(documents: list[Document]) -> list[Chunk]:
-    """
-    Paragraph chunks with the post's title carried on each one.
-
-    campus_life posts are a title line followed by one to three short
-    paragraphs, and each paragraph tends to be one fact (wait times, then
-    hours and price). So a chunk is whole paragraphs, never a cut sentence:
-      - paragraphs shorter than PARA_MIN_CHARS merge into the next one, so a
-        one-line afterthought doesn't become its own weak chunk;
-      - merging stops before a chunk passes PARA_MAX_CHARS;
-      - the title ("Kestrel Commons", "BIOL 160 Cell Biology") is prefixed to
-        every chunk. That is the overlap: it's the only context a paragraph
-        needs from the rest of the post, and "Hours are 7:00am..." is useless
-        without knowing which hall it's about.
-    A post with no blank-line paragraphs stays one chunk.
-    """
+    """Whole paragraphs, short ones merged, with the post title on every chunk."""
     max_chars = config.PARA_MAX_CHARS
     min_chars = config.PARA_MIN_CHARS
 
