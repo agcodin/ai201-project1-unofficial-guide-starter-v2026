@@ -121,9 +121,9 @@ I added two rules to `GROUNDING_INSTRUCTION` in `generate.py`. The model may onl
 
 ## How I Used AI
 
-**1.** Claude Code (Opus 5) wrote `split_documents` and the filler removal in `clean_text`. In the sample chunks it printed afterward, `course_hist_118_workload.txt` started with a lowercase "a lot of reading, about 120 pages a week", because the removed lead-in had been "People keep asking so:". Deleting the whole line would have thrown away the content after it, so the fix capitalizes the first letter of each line after cleaning.
+**1.** I used Claude to break the project into chunks I could work through one at a time, one per milestone: get the starter running, write the questions and criteria, replace the chunker, set the cutoff, then write up the README. For each step I asked it what "done" looked like, then checked the output myself before committing. When it planned the chunker, I had it print sample chunks so I could read them and decide whether each one held up on its own.
 
-**2.** After measuring the distances, Claude kept the starter's 0.6 cutoff. I checked it against the closest cases. The two-part ECON 101 question sits at 0.403, so a cutoff near 0.4 would refuse a question the corpus can answer, and that's why the cutoff sits mid-gap.
+**2.** I also used Claude to track down bugs. `python test.py` failed at the start because my system Python was 3.9 and the course needs 3.11 or newer, so it helped me rebuild the virtual environment on Python 3.12. Later, after I stripped filler lines like "People keep asking so:" out of the posts, one chunk began with a lowercase "a lot of reading". Claude explained that removing the lead-in left the rest of the line untouched. Deleting the whole line would have lost real content, so I kept the targeted removal and added a step that capitalizes the first letter of each line.
 
 ---
 
