@@ -21,6 +21,21 @@ class Document:
     text: str
 
 
+# Poster-introduction filler that carries no facts. "I lived here my sophomore
+# year." even turns up in course reviews, where it's actively misleading.
+FILLER_SENTENCES = [
+    "I lived here my sophomore year.",
+    "Second-year here.",
+    "I'm a junior and I've done this twice now.",
+    "Just finished a year in this building.",
+    "Took this last spring.",
+    "Transferred in last year, so take this with a grain of salt.",
+    "Asked about this a lot so writing it down.",
+    "People keep asking so:",
+    "Nobody tells you this at orientation.",
+]
+
+
 def clean_text(raw: str) -> str:
     """
     Strip the stuff that isn't the real content.
@@ -30,6 +45,13 @@ def clean_text(raw: str) -> str:
     text, ads, cookie banners and repeated boilerplate come out.
     """
     text = raw.replace("\r\n", "\n").replace("\r", "\n")
+
+    for filler in FILLER_SENTENCES:
+        text = text.replace(filler, "")
+    # Removing a lead-in can leave a line starting lowercase ("a lot of reading").
+    text = "\n".join(
+        line.strip()[:1].upper() + line.strip()[1:] for line in text.split("\n")
+    )
 
     # Collapse runs of blank lines down to one.
     text = re.sub(r"\n{3,}", "\n\n", text)

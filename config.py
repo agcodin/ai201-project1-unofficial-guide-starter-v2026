@@ -30,6 +30,13 @@ CORPUS = os.getenv("AI201_CORPUS", "campus_life")
 CHUNK_SIZE = 800        # characters per chunk
 CHUNK_OVERLAP = 120     # characters shared between neighbouring chunks
 
+# Used by my split_documents (the two numbers above only drive fallback_split).
+# campus_life posts average ~317 characters, split into a title line and 1-3
+# short paragraphs that each hold a separate fact. A chunk is one or more whole
+# paragraphs, capped at PARA_MAX_CHARS, with the post's title repeated on top.
+PARA_MAX_CHARS = 450    # never grow a chunk past this by merging paragraphs
+PARA_MIN_CHARS = 120    # a paragraph shorter than this gets merged into a neighbour
+
 
 # ─── Retrieval (Milestone 4) ─────────────────────────────────────────────────
 

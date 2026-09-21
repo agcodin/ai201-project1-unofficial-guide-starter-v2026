@@ -82,22 +82,56 @@ def fallback_split(
 
 def split_documents(documents: list[Document]) -> list[Chunk]:
     """
-    Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+    Paragraph chunks with the post's title carried on each one.
 
-    Right now it just calls the fallback. That is the plain, generic behaviour
-    the brief is talking about.
-
-    When you write your own strategy, set `produced_by` to
-    "chunker.py::split_documents" so your README's Sample Chunks section names
-    the right function. `app.py chunks` prints that string for you.
-
-    Things worth thinking about before you write any code:
-      - Are your documents short posts or long guides?
-      - Is the useful information in one sentence, or spread over a paragraph?
-      - Would splitting on paragraph breaks keep more thoughts intact than
-        splitting on a character count?
+    campus_life posts are a title line followed by one to three short
+    paragraphs, and each paragraph tends to be one fact (wait times, then
+    hours and price). So a chunk is whole paragraphs, never a cut sentence:
+      - paragraphs shorter than PARA_MIN_CHARS merge into the next one, so a
+        one-line afterthought doesn't become its own weak chunk;
+      - merging stops before a chunk passes PARA_MAX_CHARS;
+      - the title ("Kestrel Commons", "BIOL 160 Cell Biology") is prefixed to
+        every chunk. That is the overlap: it's the only context a paragraph
+        needs from the rest of the post, and "Hours are 7:00am..." is useless
+        without knowing which hall it's about.
+    A post with no blank-line paragraphs stays one chunk.
     """
-    return fallback_split(documents)
+    max_chars = config.PARA_MAX_CHARS
+    min_chars = config.PARA_MIN_CHARS
+
+    chunks: list[Chunk] = []
+    for doc in documents:
+        blocks = [b.strip() for b in doc.text.split("\n\n") if b.strip()]
+        if not blocks:
+            continue
+        title, paragraphs = blocks[0], blocks[1:]
+        if not paragraphs or len(doc.text) <= min_chars:
+            groups = [paragraphs or [title]]
+            title = "" if not paragraphs else title
+        else:
+            groups: list[list[str]] = []
+            for para in paragraphs:
+                current = groups[-1] if groups else None
+                size = sum(len(p) for p in current) if current else 0
+                if current and (size < min_chars or len(para) < min_chars) \
+                        and size + len(para) <= max_chars:
+                    current.append(para)
+                else:
+                    groups.append([para])
+
+        for index, group in enumerate(groups):
+            body = "\n\n".join(group)
+            text = f"{title}\n\n{body}" if title else body
+            chunks.append(
+                Chunk(
+                    text=text,
+                    source=doc.source,
+                    index=index,
+                    produced_by="chunker.py::split_documents",
+                )
+            )
+
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:
