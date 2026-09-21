@@ -50,6 +50,9 @@ TOP_K = 5               # how many chunks to pull back per question
 # 0.6 is a reasonable starting point, not a right answer. Milestone 4 has you
 # measure your own two groups of distances and put the cutoff in the gap.
 # Most corpora land somewhere between 0.45 and 0.75.
+# Measured on campus_life with my chunker: my five test questions had best
+# distances 0.18-0.40, the five OUT_OF_SCOPE questions 0.82-0.93. 0.6 sits
+# roughly in the middle of that gap, ~0.2 clear of each group.
 THRESHOLD = 0.6
 
 

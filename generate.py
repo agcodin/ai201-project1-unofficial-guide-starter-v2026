@@ -279,6 +279,8 @@ Rules:
 - Use only the information in the documents below. Do not use anything you know from elsewhere.
 - If the documents don't cover the question, say you don't have enough information. Do not guess.
 - Name the document your answer came from, using the filename given in each excerpt.
+- Many documents describe different dining halls, dorms or courses in the same format. Only use a document about the exact hall, building or course the question names; never borrow numbers from a similar one.
+- End with a line of the form "Source: <filename>" listing the file(s) you actually used.
 - Be brief. Two or three sentences is usually enough."""
 
 
