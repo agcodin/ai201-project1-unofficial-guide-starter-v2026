@@ -8,7 +8,7 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-Three of my questions are single-fact lookups where the answer sits in one sentence in one post, and those should be easy. The other two ask the system to compare across posts ("which dining hall has the shortest wait", "which is open the latest"), and the corpus has 14 dining posts against a top-k of 5, so the retrieved set may not even contain the winner. I set 4 of 5 because I think one comparison question can work and I want to find out which.
+Three of my questions are single-fact lookups where the answer sits in one sentence in one post, and those should be easy. The other two ask the system to compare across posts ("which dining hall is cheapest if I pay cash", "which is open the latest"), and the corpus has 14 dining posts against a top-k of 5, so the retrieved set may not even contain the winning hall. Both have one right answer that two people would agree on: Halden Hall at $10.00 cash, and Verrill Street Grill open until 1:00am. I set 4 of 5 because I think one comparison question can work and I want to find out which.
 
 ## 2. Every answer names a source
 

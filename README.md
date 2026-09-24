@@ -98,15 +98,15 @@ I don't have enough information about that.
 
 **My relevance cutoff:** 0.6 (`THRESHOLD` in `config.py`), with `TOP_K = 5`.
 
-I ran my five test questions and the five `OUT_OF_SCOPE` questions through `python app.py retrieve` and recorded the best distance for each. My questions landed between 0.18 and 0.44. The out-of-scope ones landed between 0.82 and 0.93. Nothing fell between 0.44 and 0.82, and 0.6 sits about 0.16 above my hardest question and 0.22 below the nearest out-of-scope one.
+I ran my five test questions and the five `OUT_OF_SCOPE` questions through `python app.py retrieve` and recorded the best distance for each. My questions landed between 0.18 and 0.54. The out-of-scope ones landed between 0.82 and 0.93. Nothing fell between 0.54 and 0.82, and 0.6 sits 0.06 above my hardest question and 0.22 below the nearest out-of-scope one.
 
-The two comparison questions sit furthest out, at 0.325 and 0.436, because no single post answers them. A cutoff near 0.4 would refuse them, and they are the questions I most want to see attempted, since a wrong comparison tells me something a refusal wouldn't. ECON 101 is close behind at 0.403, asking two things at once. Of the out-of-scope questions, Mongolia got closest at 0.82, matching the HIST 118 world history posts on vocabulary.
+The gap is wide, but my margin on the in-corpus side is thin, and that is deliberate. My two comparison questions ("which dining hall is cheapest if I pay cash", "which is open the latest") are answerable from the corpus, yet no single post answers either one, so their best match sits far out at 0.538 and 0.436. Lowering the cutoff to 0.5 would refuse the cheapest question, and I would rather see a wrong comparison than a refusal, because a wrong answer tells me retrieval handed the model an incomplete set. ECON 101 sits at 0.403, asking two things at once. Of the out-of-scope questions, Mongolia got closest at 0.82, matching the HIST 118 world history posts on vocabulary.
 
 Each dining hall and course has two or three near-duplicate posts (the original, a `_followup`, and `_exams` or `_workload` versions), and they tend to fill the top two or three results together. Top-k of 5 leaves room for a couple of other posts after them.
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-| Which dining hall has the shortest wait at lunch? | Yes | 0.3249 |
+| Which dining hall is cheapest if I pay cash? | Yes | 0.5380 |
 | Which dining hall is open the latest? | Yes | 0.4356 |
 | Do dining dollars roll over from spring semester to the next autumn? | Yes | 0.1849 |
 | How are juniors and seniors ordered in the housing lottery? | Yes | 0.2250 |
