@@ -22,10 +22,10 @@ names a target of "4 of 5", and four of three is not a thing.
 """
 
 QUESTIONS = [
-    {"question": "How long is the lunchtime wait at Kestrel Commons between 12:15 and 1:00?", "expects": "20 to 25 minutes"},
+    {"question": "Which dining hall has the shortest wait at lunch?", "expects": "Atrium"},
+    {"question": "Which dining hall is open the latest?", "expects": "1:00am"},
     {"question": "Do dining dollars roll over from spring semester to the next autumn?", "expects": "May"},
     {"question": "How are juniors and seniors ordered in the housing lottery?", "expects": "credit hours"},
-    {"question": "When is the best time to do laundry at Fenwick Court?", "expects": "Tuesday or Wednesday morning"},
     {"question": "Is ECON 101 curved, and what kind of exams does it have?", "expects": "multiple choice"},
 ]
 

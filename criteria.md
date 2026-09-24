@@ -8,7 +8,7 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-In four of my questions, the answer is one sentence in one post, which is the easy case for this corpus. The housing lottery question is the likely miss. `advising_registration.txt` also says registration is "staggered by credit hours, same as the housing lottery," so a similar post could push the real answer out. Asking for 5 of 5 would assume that never happens.
+Three of my questions are single-fact lookups where the answer sits in one sentence in one post, and those should be easy. The other two ask the system to compare across posts ("which dining hall has the shortest wait", "which is open the latest"), and the corpus has 14 dining posts against a top-k of 5, so the retrieved set may not even contain the winner. I set 4 of 5 because I think one comparison question can work and I want to find out which.
 
 ## 2. Every answer names a source
 
