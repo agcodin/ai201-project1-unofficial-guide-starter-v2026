@@ -23,7 +23,7 @@ names a target of "4 of 5", and four of three is not a thing.
 
 QUESTIONS = [
     {"question": "Which dining hall is cheapest if I pay cash?", "expects": "Halden"},
-    {"question": "Which dining hall is open the latest?", "expects": "1:00am"},
+    {"question": "Which dining hall is open the latest?", "expects": "Verrill"},
     {"question": "Do dining dollars roll over from spring semester to the next autumn?", "expects": "May"},
     {"question": "How are juniors and seniors ordered in the housing lottery?", "expects": "credit hours"},
     {"question": "Is ECON 101 curved, and what kind of exams does it have?", "expects": "multiple choice"},

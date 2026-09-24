@@ -32,7 +32,7 @@ CHUNK_OVERLAP = 120     # characters shared between neighbouring chunks
 
 # split_documents uses these; the two above only drive fallback_split.
 PARA_MAX_CHARS = 450
-PARA_MIN_CHARS = 120
+PARA_MIN_CHARS = 60
 
 
 # ─── Retrieval (Milestone 4) ─────────────────────────────────────────────────
