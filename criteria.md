@@ -33,6 +33,10 @@ At least 4 of 5 chunks printed by `python app.py chunks -n 5` can answer one spe
 **Why this target:**
 In Milestone 1, most posts had two or three facts in separate paragraphs (wait time in one, hours and price in another), so each paragraph chunk should answer something by itself. 60 characters is about the length of a title line alone. Anything shorter is a fragment, like the 2-character tail the starter produced on `advice_threads`. I allow one weak chunk in five because some posts end with a filler line that carries no fact.
 
+> **Revised in unit 2:** At least 4 of 5 chunks printed by `python app.py chunks -n 5` contain no sentence cut off at either end, and no chunk in the whole index is shorter than 60 characters.
+>
+> **Why revised:** The original said a chunk "can answer one specific question on their own", and I could not score that twice the same way. I counted 5 of 5 on the before run, then reading the same chunks again I could argue a chunk like "The bad: known damp problem on the ground floor" only answers anything because the title line above it names the building. Whole sentences are countable; standing on its own is a judgment call. The 60-character floor is unchanged and was measurable all along.
+
 ## 5. The cited source is the right one
 
 For my 5 test questions, the file named in the answer's `Source:` line is the one that actually contains the `expects` phrase in at least 4 of 5 answers.
