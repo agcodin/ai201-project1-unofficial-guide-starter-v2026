@@ -129,6 +129,8 @@ I added two rules to `GROUNDING_INSTRUCTION` in `generate.py`. The model may onl
 
 ## Run Log — Before
 
+One disclosure before the numbers. On 23 September, before any eval run, I replaced two of my five test questions with cross-document comparison questions, and changed one `expects` phrase from "1:00am" to "Verrill" because "1:00am" is a substring of "11:00am" in another hall's hours. The five criteria and their targets are unchanged from unit 1, and both run logs below use the same question set, so before and after are comparable. The note sits under criterion 1 in `criteria.md` with the original text left in place.
+
 `python run_eval.py --label before`, three runs per question, cache off. Raw file: `results/run_2026-09-23_2023_before.md`, written by `run_eval.py::main`. Scored by `scorer.py::judge`.
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
